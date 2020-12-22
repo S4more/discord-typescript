@@ -2,8 +2,10 @@ import { Client } from 'discord.js';
 import { EventHandler } from './utils/event_handler'
 import { WebSocket } from './site/socket'
 
+
 const app = require('express')();
 const http = require('http').createServer(app);
+const token = require('../config.json');
 
 const client = new Client();
 const websocket = new WebSocket(http, client); 
@@ -14,7 +16,7 @@ client.on('ready', () => {
 	eventHandler.run();	
 });
 
-client.login("Nzg2MDI2MDIxNTMwODk0MzU3.X9AZxw.4D9pf6Hb07vZCFix73PcC17O-WE");
+client.login(token.token);
 
 app.get('/', (req:any, res:any) => {
   res.sendFile(__dirname + '/site/index.html');
