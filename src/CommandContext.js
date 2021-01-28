@@ -53,8 +53,7 @@ var CommandContext = /** @class */ (function () {
     CommandContext.prototype.reply = function (message) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.originalMessage.reply(message);
-                return [2 /*return*/];
+                return [2 /*return*/, this.originalMessage.reply(message)];
             });
         });
     };

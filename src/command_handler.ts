@@ -1,6 +1,7 @@
 import { Message } from 'discord.js';
 import { CommandContext } from './CommandContext';
 import { Command } from './commands/command'
+import { CreateSectionSelection } from "./commands/create_help";
 import { Ping } from './commands/ping';
 import { Help } from './commands/help';
 export class CommandHandler {
@@ -10,7 +11,8 @@ export class CommandHandler {
 	constructor(prefix: string) {
 		// Handles all commands
 		const commandClasses = [
-			Ping
+			Ping,
+            CreateSectionSelection
 		];
 		
 		this.commands = commandClasses.map((commandClasses) => new commandClasses());

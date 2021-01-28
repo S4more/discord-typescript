@@ -3,6 +3,7 @@ import { Event } from "./event";
 import { VoiceState } from "./voiceState";
 import { WebSocket } from "./../site/socket";
 import { MessageEvent } from "./events/message_event";
+import { ReactionEvent } from "./events/reaction_event";
 
 export class EventHandler {
 	private client: Client;
@@ -14,7 +15,8 @@ export class EventHandler {
 		// Array with all the desired events listeners.
 		const events = [
 			MessageEvent,
-			VoiceState
+			VoiceState,
+            ReactionEvent
 		];
 		
 		this.events = events.map((event) => new event(this.client, this.logger, this.webSocket));

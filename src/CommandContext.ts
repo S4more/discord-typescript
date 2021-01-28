@@ -18,7 +18,7 @@ export class CommandContext {
 	/**
 	 * Shorthand for CommandContext.originalMessage.reply();
 	 */
-	async reply (message: string) {
-		this.originalMessage.reply(message);
+	async reply (message: string): Promise<Message> {
+		return this.originalMessage.reply(message);
 	}
 }

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventHandler = void 0;
 var voiceState_1 = require("./voiceState");
 var message_event_1 = require("./events/message_event");
+var reaction_event_1 = require("./events/reaction_event");
 var EventHandler = /** @class */ (function () {
     function EventHandler(bot, webSocket) {
         var _this = this;
@@ -11,7 +12,8 @@ var EventHandler = /** @class */ (function () {
         // Array with all the desired events listeners.
         var events = [
             message_event_1.MessageEvent,
-            voiceState_1.VoiceState
+            voiceState_1.VoiceState,
+            reaction_event_1.ReactionEvent
         ];
         this.events = events.map(function (event) { return new event(_this.client, _this.logger, _this.webSocket); });
     }

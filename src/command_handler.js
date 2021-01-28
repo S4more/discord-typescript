@@ -38,13 +38,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommandHandler = void 0;
 var CommandContext_1 = require("./CommandContext");
+var create_help_1 = require("./commands/create_help");
 var ping_1 = require("./commands/ping");
 var help_1 = require("./commands/help");
 var CommandHandler = /** @class */ (function () {
     function CommandHandler(prefix) {
         // Handles all commands
         var commandClasses = [
-            ping_1.Ping
+            ping_1.Ping,
+            create_help_1.CreateSectionSelection
         ];
         this.commands = commandClasses.map(function (commandClasses) { return new commandClasses(); });
         this.commands.push(new help_1.Help(this.commands));
