@@ -1,4 +1,4 @@
 #Exclude all javascript files
-.js
+*.js
 config.json
 node_modules/*
