@@ -3,7 +3,10 @@ import { CommandContext } from './CommandContext';
 import { Command } from './commands/command'
 import { CreateSectionSelection } from "./commands/create_help";
 import { Ping } from './commands/ping';
+import { DefineSection } from './commands/define_section_channel';
 import { Help } from './commands/help';
+
+
 export class CommandHandler {
 	private readonly prefix:string;
 	private commands: Command[];
@@ -12,7 +15,8 @@ export class CommandHandler {
 		// Handles all commands
 		const commandClasses = [
 			Ping,
-            CreateSectionSelection
+            CreateSectionSelection,
+            DefineSection
 		];
 		
 		this.commands = commandClasses.map((commandClasses) => new commandClasses());

@@ -1,25 +1,15 @@
 import { MessageReaction, User } from "discord.js";
-import { SMessageController } from "../../database/SMessageController";
-
-interface sectionEmojis {
-    [emoji: string]: string
-}
-
-export const emojis: sectionEmojis = {
-    '1️⃣': '804175032817156096',
-    '2️⃣': '804177367152590858',
-    '3️⃣': '804177372013264896',
-    '4️⃣': '804177372034629682' 
-}
+import { RolesController } from "../../database/controllers/RolesController";
 
 export async function sectionSelection (reaction: MessageReaction, user: User) {
-    let role_id = emojis[reaction.emoji.name];
-    let member = reaction.message.member;
-
-    const client = new SMessageController();
-
+    const rolesController = new RolesController();
+    let roles = await rolesController.getAll();
+    let role_id = await rolesController.get(undefined, undefined, reaction.emoji.name);
+    let member = reaction.message.guild?.members.cache.find(member => member.id == user.id);
 
     // Borrowed from discordjs.guide.
+    console.log(role_id);
+
     // Removes the user reaction.
     reaction.message.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
     await reaction.users.remove(user.id);
@@ -28,13 +18,15 @@ export async function sectionSelection (reaction: MessageReaction, user: User) {
         
         //Removes any other sections the user may be in
         member?.roles.cache
-            .filter(role => Object.values(emojis)
-                    .some(id => id == role.id))
+            .filter(role => roles
+                    .some(id => id.id == role.id))
             .forEach(role => member?.roles.remove(role));
 
-        let role = await reaction.message.guild?.roles.fetch(role_id);
+        let role = await reaction.message.guild?.roles.fetch(role_id.id);
+        console.log(role?.name);
         if ( role ){
-            member?.roles.add(role);
+            console.log("adding to role");
+            await member?.roles.add(role);
         }
     };
                                          
